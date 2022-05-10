@@ -44,4 +44,14 @@ public class UserController {
         return ResponseEntity.created(location).build();
     }
     // 데이터 타입이 아닌 json이나 xml같은 오브젝트 형태의 데이터를 받기 위해서는 매개변수에 @RequestBody를 선언해야 한다.
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        User user = service.deleteById(id);
+
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+
+    }
 }
