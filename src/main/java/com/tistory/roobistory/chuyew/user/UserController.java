@@ -1,11 +1,13 @@
 package com.tistory.roobistory.chuyew.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -53,5 +55,11 @@ public class UserController {
             throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
 
+    }
+
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable Integer id, @RequestBody User user){
+        service.updateUser(id,user);
+        return user;
     }
 }
